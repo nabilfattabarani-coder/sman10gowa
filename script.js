@@ -14,7 +14,9 @@ if (popup) {
   popup.addEventListener('click', (e) => {
     if (e.target === popup) hidePopup();
   });
-}// Animasi muncul saat elemen kelihatan pas di-scroll
+}
+
+// Animasi muncul saat elemen kelihatan pas di-scroll
 const revealEls = document.querySelectorAll('.reveal');
 
 const observer = new IntersectionObserver((entries) => {
@@ -27,6 +29,7 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: 0.15 });
 
 revealEls.forEach((el) => observer.observe(el));
+
 // Muat dan tampilkan berita dari news.json
 fetch('news.json')
   .then((res) => res.json())
