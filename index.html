@@ -10,10 +10,23 @@
 <meta property="og:description" content="Website resmi SMA Negeri 10 Gowa, Kabupaten Gowa, Sulawesi Selatan.">
 <meta property="og:image" content="https://nabilfattabarani-coder.github.io/sman10gowa/hero-bg.jpg">
 <meta property="og:type" content="website">
+<meta name="color-scheme" content="light dark">
 <link rel="icon" href="logo.jpg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;0,8..60,700;1,8..60,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+<script>
+  /* Terapkan tema tersimpan sebelum render, biar tidak "kedip" putih->gelap */
+  (function(){
+    try{
+      var saved = localStorage.getItem('sman10gowa_theme');
+      var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+      if(saved === 'dark' || (!saved && prefersDark)){
+        document.documentElement.classList.add('dark');
+      }
+    }catch(e){}
+  })();
+</script>
 </head>
 <body>
 
@@ -42,16 +55,26 @@
       <img src="logo.jpg" alt="Lambang SMAN 10 Gowa" class="brand-mark">
       <span class="brand-text">SMAN 10 GOWA</span>
     </a>
-    <nav class="nav">
-      <a href="#profil">Profil</a>
-      <a href="#data-pokok">Data Pokok</a>
-      <a href="#guru">Guru</a>
-      <a href="#ekskul">Ekskul</a>
-      <a href="#berita">Berita</a>
-      <a href="#kontak">Kontak</a>
-    </nav>
+    <div class="nav-wrap">
+      <nav class="nav">
+        <a href="#profil">Profil</a>
+        <a href="#data-pokok">Data Pokok</a>
+        <a href="#guru">Guru</a>
+        <a href="#ekskul">Ekskul</a>
+        <a href="#kalender">Kalender</a>
+        <a href="#berita">Berita</a>
+        <a href="#kontak">Kontak</a>
+      </nav>
+      <button id="theme-toggle" class="theme-toggle" aria-label="Ganti mode gelap/terang" title="Ganti mode gelap/terang">🌙</button>
+    </div>
   </div>
 </header>
+
+<div class="ticker-wrap" id="ticker-wrap">
+  <div class="ticker-track" id="ticker-track">
+    <span class="ticker-item">Memuat pengumuman...</span>
+  </div>
+</div>
 
 <main id="top">
 
@@ -238,10 +261,24 @@
     </div>
   </section>
 
+  <section id="kalender" class="kalender">
+    <div class="wrap">
+      <p class="section-eyebrow light">Kalender Akademik</p>
+      <h2 class="light">Tahun Ajaran 2026/2027</h2>
+      <p class="kalender-note">Mengikuti pola kalender pendidikan nasional 2026/2027. Tanggal detail dapat berbeda sedikit menyesuaikan SK resmi Dinas Pendidikan Provinsi Sulawesi Selatan — silakan sesuaikan file <code>kalender.json</code> jika sekolah menerbitkan kaldik tersendiri.</p>
+      <div id="kalender-list" class="kalender-list reveal">
+        <p class="kalender-loading">Memuat kalender...</p>
+      </div>
+    </div>
+  </section>
+
   <section id="berita" class="berita">
     <div class="wrap">
       <p class="section-eyebrow">Kabar Sekolah</p>
       <h2>Berita &amp; Kegiatan</h2>
+      <div class="berita-search-wrap">
+        <input type="text" id="berita-search" class="berita-search" placeholder="Cari berita berdasarkan judul atau isi...">
+      </div>
       <div id="berita-list" class="berita-grid reveal">
         <p class="berita-loading">Memuat berita...</p>
       </div>
@@ -262,6 +299,8 @@
     </div>
   </div>
 </footer>
+
+<button id="back-to-top" class="back-to-top" aria-label="Kembali ke atas" title="Kembali ke atas">↑</button>
 
 <script src="script.js"></script>
 </body>
