@@ -100,7 +100,10 @@ html.dark .theme-toggle:hover{background:rgba(255,255,255,0.08);}
 .ticker-track:hover{animation-play-state:paused;}
 .ticker-item{
   color:#fff; font-size:.8rem; font-weight:600;
-  padding:9px 40px; flex-shrink:0; letter-spacing:.01em;
+  padding:9px 0; flex-shrink:0; letter-spacing:.01em;
+}
+.ticker-dot{
+  color:rgba(255,255,255,0.5); margin:0 32px; font-weight:400;
 }
 @keyframes ticker-scroll{
   from{transform:translateX(0);}

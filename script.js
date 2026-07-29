@@ -101,7 +101,7 @@ function initTicker(){
         wrap.style.display = 'none';
         return;
       }
-      const html = items.map(item => `<span class="ticker-item">📢 ${escapeHtml(item.text)}</span>`).join('');
+      const html = items.map(item => `<span class="ticker-item">${escapeHtml(item.text)}<span class="ticker-dot">&bull;</span></span>`).join('');
       // Digandakan supaya animasi looping mulus tanpa jeda
       track.innerHTML = html + html;
     })
