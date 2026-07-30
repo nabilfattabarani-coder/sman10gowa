@@ -142,11 +142,11 @@ html.dark .theme-toggle:hover{background:rgba(255,255,255,0.08);}
 .ai-bubble{
   position:fixed; left:20px; bottom:22px; z-index:61;
   display:flex; align-items:center;
-  background:var(--flame); color:#fff;
+  background:var(--teal); color:#fff;
   border-radius:999px;
-  box-shadow:0 12px 26px rgba(181,57,44,0.4);
+  box-shadow:0 12px 26px rgba(20,61,56,0.4);
   overflow:hidden;
-  transition:box-shadow .25s ease, transform .2s ease;
+  transition:box-shadow .25s ease, transform .2s ease, background .2s ease;
   animation:bubble-pop .5s ease;
 }
 .ai-bubble-icon{
@@ -160,7 +160,7 @@ html.dark .theme-toggle:hover{background:rgba(255,255,255,0.08);}
   font-weight:600; font-size:.85rem;
   transition:max-width .35s ease, padding .35s ease;
 }
-.ai-bubble:hover{transform:translateY(-3px); box-shadow:0 16px 32px rgba(181,57,44,0.48);}
+.ai-bubble:hover{background:var(--teal-deep); transform:translateY(-3px); box-shadow:0 16px 32px rgba(20,61,56,0.48);}
 .ai-bubble:hover .ai-bubble-label{max-width:220px; padding-right:18px;}
 @keyframes bubble-pop{
   0%{transform:scale(0); opacity:0;}
