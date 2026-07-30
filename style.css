@@ -138,29 +138,47 @@ html.dark .theme-toggle:hover{background:rgba(255,255,255,0.08);}
   padding:6px 14px; border-radius:999px;
 }
 
-/* Tombol CTA mengambang (persisten, terpisah dari popup) */
-.cta-float-wrap{
-  position:relative;
-  display:flex; justify-content:center;
-  margin-top:-26px;
-  z-index:15;
+/* Bubble chat AI mengambang (persisten, terpisah dari popup) */
+.ai-bubble{
+  position:fixed; left:20px; bottom:22px; z-index:61;
+  display:flex; align-items:center;
+  background:var(--flame); color:#fff;
+  border-radius:999px;
+  box-shadow:0 12px 26px rgba(181,57,44,0.4);
+  overflow:hidden;
+  transition:box-shadow .25s ease, transform .2s ease;
+  animation:bubble-pop .5s ease;
 }
-.cta-float-btn{
-  display:inline-flex; align-items:center; gap:8px;
-  background:var(--teal); color:#fff;
-  font-weight:600; font-size:.92rem;
-  padding:14px 26px; border-radius:999px;
-  box-shadow:0 16px 32px rgba(20,61,56,0.35);
-  transition:transform .2s ease, background .2s ease, box-shadow .2s ease;
-  white-space:nowrap;
+.ai-bubble-icon{
+  width:52px; height:52px; flex-shrink:0;
+  display:flex; align-items:center; justify-content:center;
+  font-size:1.4rem;
+  animation:bubble-pulse 2.6s ease-in-out infinite;
 }
-.cta-float-btn:hover{
-  background:var(--teal-deep);
-  transform:translateY(-3px);
-  box-shadow:0 20px 38px rgba(20,61,56,0.4);
+.ai-bubble-label{
+  max-width:0; overflow:hidden; white-space:nowrap;
+  font-weight:600; font-size:.85rem;
+  transition:max-width .35s ease, padding .35s ease;
+}
+.ai-bubble:hover{transform:translateY(-3px); box-shadow:0 16px 32px rgba(181,57,44,0.48);}
+.ai-bubble:hover .ai-bubble-label{max-width:220px; padding-right:18px;}
+@keyframes bubble-pop{
+  0%{transform:scale(0); opacity:0;}
+  70%{transform:scale(1.08); opacity:1;}
+  100%{transform:scale(1);}
+}
+@keyframes bubble-pulse{
+  0%,100%{transform:scale(1);}
+  50%{transform:scale(1.12);}
+}
+@media (prefers-reduced-motion: reduce){
+  .ai-bubble{animation:none;}
+  .ai-bubble-icon{animation:none;}
 }
 @media (max-width:480px){
-  .cta-float-btn{font-size:.85rem; padding:12px 20px;}
+  .ai-bubble{left:14px; bottom:16px;}
+  .ai-bubble-icon{width:46px; height:46px; font-size:1.2rem;}
+  .ai-bubble-label{font-size:.78rem;}
 }
 
 /* Strip */
