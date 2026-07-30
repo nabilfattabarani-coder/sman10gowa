@@ -90,7 +90,7 @@ html.dark .theme-toggle:hover{background:rgba(255,255,255,0.08);}
 
 /* Pengumuman Berjalan */
 .ticker-wrap{
-  background:var(--flame); overflow:hidden; white-space:nowrap;
+  background:var(--teal); overflow:hidden; white-space:nowrap;
   position:relative;
 }
 .ticker-track{
