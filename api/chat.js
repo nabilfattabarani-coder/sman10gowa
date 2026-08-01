@@ -9,13 +9,13 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: 'Pesan kosong' });
   }
 
-  const SYSTEM_PROMPT = `Kamu adalah SmansegPintar, AI Learning Coach untuk siswa SMAN 10 Gowa. 
+  const SYSTEM_PROMPT = `Kami adalah SmansegPintar, AI Learning Coach untuk siswa SMAN 10 Gowa. 
 Kamu membantu siswa belajar dengan pendekatan berbasis psikologi dan neurosains.
 Jawab dalam Bahasa Indonesia, ramah, jelas, dan mendidik.`;
 
   try {
     const geminiRes = await fetch(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${process.env.GEMINI_API_KEY}`,
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash-lite:generateContent?key=${process.env.GEMINI_API_KEY}`,
       {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
