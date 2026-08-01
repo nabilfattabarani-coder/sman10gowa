@@ -43,7 +43,7 @@
       Penasaran? Coba ngobrol langsung dengan asisten AI belajar kami, SmansegPintar.
     </p>
     <div class="popup-actions">
-      <a href="https://poe.com/SmansegPintar" target="_blank" rel="noopener" class="popup-cta">Coba SmansegPintar</a>
+      
       <button id="popup-dismiss" class="popup-dismiss">Nanti saja</button>
     </div>
   </div>
@@ -299,12 +299,66 @@
     </div>
   </div>
 </footer>
+<div id="smansegpintar-widget">
+  <button id="sp-toggle" style="position:fixed;bottom:20px;left:20px;width:56px;height:56px;border-radius:50%;background:#14532d;border:none;color:white;font-size:24px;cursor:pointer;z-index:9999;">💬</button>
 
-<a href="https://poe.com/SmansegPintar" target="_blank" rel="noopener" class="ai-bubble" aria-label="Coba SmansegPintar" title="Coba SmansegPintar">
-  <span class="ai-bubble-icon">💬</span>
-  <span class="ai-bubble-label">Coba SmansegPintar</span>
-</a>
+  <div id="sp-chatbox" style="display:none;position:fixed;bottom:85px;left:20px;width:300px;max-width:90vw;height:400px;background:white;border-radius:12px;box-shadow:0 4px 20px rgba(0,0,0,0.3);z-index:9999;flex-direction:column;overflow:hidden;">
+    <div style="background:#14532d;color:white;padding:12px;font-weight:bold;">SmansegPintar</div>
+    <div id="sp-messages" style="flex:1;overflow-y:auto;padding:10px;font-size:14px;"></div>
+    <div style="display:flex;border-top:1px solid #ddd;">
+      <input id="sp-input" type="text" placeholder="Tanya sesuatu..." style="flex:1;border:none;padding:10px;font-size:14px;">
+      <button id="sp-send" style="background:#14532d;color:white;border:none;padding:0 16px;">Kirim</button>
+    </div>
+  </div>
+</div>
 
+<script>
+const spToggle = document.getElementById('sp-toggle');
+const spBox = document.getElementById('sp-chatbox');
+const spMessages = document.getElementById('sp-messages');
+const spInput = document.getElementById('sp-input');
+const spSend = document.getElementById('sp-send');
+let spHistory = [];
+
+spToggle.onclick = () => {
+  spBox.style.display = spBox.style.display === 'none' ? 'flex' : 'none';
+};
+
+function addMessage(text, from) {
+  const div = document.createElement('div');
+  div.style.margin = '6px 0';
+  div.style.textAlign = from === 'user' ? 'right' : 'left';
+  div.innerHTML = `<span style="display:inline-block;padding:6px 10px;border-radius:8px;background:${from === 'user' ? '#dcfce7' : '#f1f1f1'};">${text}</span>`;
+  spMessages.appendChild(div);
+  spMessages.scrollTop = spMessages.scrollHeight;
+}
+
+async function sendMessage() {
+  const msg = spInput.value.trim();
+  if (!msg) return;
+  addMessage(msg, 'user');
+  spInput.value = '';
+
+  try {
+    const res = await fetch('https://sman10gowa.vercel.app/api/chat', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ message: msg, history: spHistory })
+    });
+    const data = await res.json();
+    addMessage(data.reply, 'bot');
+    spHistory.push({ role: 'user', parts: [{ text: msg }] });
+    spHistory.push({ role: 'model', parts: [{ text: data.reply }] });
+  } catch (err) {
+    addMessage('Maaf, terjadi kesalahan koneksi.', 'bot');
+  }
+}
+
+spSend.onclick = sendMessage;
+spInput.addEventListener('keypress', (e) => {
+  if (e.key === 'Enter') sendMessage();
+});
+</script>
 <button id="back-to-top" class="back-to-top" aria-label="Kembali ke atas" title="Kembali ke atas">↑</button>
 
 <script src="script.js"></script>
