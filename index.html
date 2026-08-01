@@ -328,7 +328,7 @@ function addMessage(text, from) {
   const div = document.createElement('div');
   div.style.margin = '6px 0';
   div.style.textAlign = from === 'user' ? 'right' : 'left';
-  div.innerHTML = `<span style="display:inline-block;padding:6px 10px;border-radius:8px;background:${from === 'user' ? '#dcfce7' : '#f1f1f1'};">${text}</span>`;
+  div.innerHTML = `<span style="display:inline-block;padding:6px 10px;border-radius:8px;background:${from === 'user' ? '#dcfce7' : '#f1f1f1'};color:#111;">${text}</span>`;
   spMessages.appendChild(div);
   spMessages.scrollTop = spMessages.scrollHeight;
 }
